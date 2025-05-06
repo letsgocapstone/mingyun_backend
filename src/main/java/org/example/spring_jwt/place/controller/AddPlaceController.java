@@ -30,6 +30,8 @@ public class AddPlaceController {
             @RequestParam("placeTitle") String placeTitle,
             @RequestParam("lat") Double latitude,
             @RequestParam("lng") Double longitude,
+            @RequestParam("rating") Integer rating,
+            @RequestParam("placeDescription") String placeDescription,
             @RequestParam("placeImageURL") MultipartFile imageFile) throws IOException {
 
         PlaceDTO placeDTO = new PlaceDTO();
@@ -41,6 +43,8 @@ public class AddPlaceController {
         placeDTO.setLatitude(latitude);
         placeDTO.setLongitude(longitude);
         placeDTO.setPlaceImageURL(path);
+        placeDTO.setRating(rating);
+        placeDTO.setPlaceDescription(placeDescription);
 
         System.out.println("Adding place " + placeDTO.getPlaceImageURL());
 

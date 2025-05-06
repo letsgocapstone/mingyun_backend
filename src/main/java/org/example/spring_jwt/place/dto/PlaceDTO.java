@@ -8,9 +8,10 @@ import org.example.spring_jwt.entity.UserEntity;
 @Setter
 public class PlaceDTO {
     private String placeTitle;
-//    private String placeDescription;
+    private String placeDescription;
     private Double latitude;
     private Double longitude;
     private String placeImageURL;
+    private Integer rating;
     private int userId;
 }

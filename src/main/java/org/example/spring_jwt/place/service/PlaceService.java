@@ -28,10 +28,11 @@ public class PlaceService {
 
         PlaceEntity place = new PlaceEntity();
         place.setPlaceTitle(placeDTO.getPlaceTitle());
-//        place.setPlaceDescription(placeDTO.getPlaceDescription());
+        place.setPlaceDescription(placeDTO.getPlaceDescription());
         place.setLatitude(placeDTO.getLatitude());
         place.setLongitude(placeDTO.getLongitude());
         place.setPlaceImageURL(placeDTO.getPlaceImageURL());
+        place.setRating(placeDTO.getRating());
         place.setUser(user);
 
         placeRepository.save(place);
