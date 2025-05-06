@@ -1,0 +1,13 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    container_name: mysql-container
+    environment:
+      - 'MYSQL_DATABASE=mydatabase'
+      - 'MYSQL_PASSWORD=0112'
+      - 'MYSQL_ROOT_PASSWORD=1218'
+      - 'MYSQL_USER=myuser'
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - '3306:3306'

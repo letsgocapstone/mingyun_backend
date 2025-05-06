@@ -18,7 +18,7 @@ public class JoinController {
 
     @PostMapping("/join")
     public ResponseDTO JoinProcess(@RequestBody JoinDTO joinDTO) {
-        System.out.println("hello im ID"+joinDTO.getEmail());
+        System.out.println("hello im ID"+joinDTO.getUsername());
         System.out.println(joinDTO.getPassword());
         joinService.joinProcess(joinDTO);
         return new ResponseDTO("ok");

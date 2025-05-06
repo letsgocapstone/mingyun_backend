@@ -19,7 +19,7 @@ public class JoinService {
     }
 
     public void joinProcess(JoinDTO joinDTO) {
-        String username = joinDTO.getEmail();
+        String username = joinDTO.getUsername();
         String password = joinDTO.getPassword();
 
         Boolean isExist = userRepository.existsByUsername(username);
