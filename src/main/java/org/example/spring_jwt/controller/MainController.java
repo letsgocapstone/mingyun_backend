@@ -17,7 +17,7 @@ import java.util.Map;
 //@Controller
 //@ResponseBody
 @RestController
-public class MainController {
+public class  MainController {
     @GetMapping("/")
     public MemberDTO mainP() {
         MemberDTO memberDTO = new MemberDTO();
