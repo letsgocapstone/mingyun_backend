@@ -9,6 +9,7 @@ import org.example.spring_jwt.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -44,6 +45,8 @@ public class PlaceService {
         List<PlaceEntity> entities = placeRepository.findNearbyPlaces(lat, lng, radius);
 
         List<PlaceDTO> dtos = entities.stream().map(this::convertToDTO).toList();
+        System.out.println("entities =");
+        System.out.println(entities.get(0).getId());
 
         LoadPlaceDTO response = new LoadPlaceDTO();
         response.setPoi(dtos);
@@ -54,6 +57,7 @@ public class PlaceService {
         dto.setPlaceTitle(entity.getPlaceTitle());
         dto.setLatitude(entity.getLatitude());
         dto.setLongitude(entity.getLongitude());
+        dto.setPlaceId(entity.getId());
         dto.setPlaceImageURL(entity.getPlaceImageURL());
         dto.setUserId(entity.getUser() != null ? entity.getUser().getId() : null);
         return dto;

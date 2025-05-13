@@ -14,4 +14,5 @@ public class PlaceDTO {
     private String placeImageURL;
     private Integer rating;
     private int userId;
+    private int placeId;
 }
