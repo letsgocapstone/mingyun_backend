@@ -36,7 +36,7 @@ public class AddPlaceController {
 
         PlaceDTO placeDTO = new PlaceDTO();
 
-        String path = "/Users/mingyun/Desktop/project/spring_jwt/src/main/java/org/example/spring_jwt/place/image/"+imageFile.getOriginalFilename();
+        String path = "C:\\Users\\admin\\Desktop\\caps_springboot\\test2\\mingyun_backend\\photo"+imageFile.getOriginalFilename();
         imageFile.transferTo(new File(path));
 
         placeDTO.setPlaceTitle(placeTitle);
