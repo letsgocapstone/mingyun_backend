@@ -4,6 +4,7 @@ import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.dto.PlaceDTO;
 import org.example.spring_jwt.place.service.PlaceService;
 import org.example.spring_jwt.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/place")
@@ -25,6 +27,8 @@ public class AddPlaceController {
         this.userRepository = userRepository;
     }
     // 장소 등록 API
+    @Value("${spring.my.path}")
+    private String basePath;
     @PostMapping("/add")
     public ResponseEntity<String> addPlace(
             @RequestParam("placeTitle") String placeTitle,
@@ -36,7 +40,10 @@ public class AddPlaceController {
 
         PlaceDTO placeDTO = new PlaceDTO();
 
-        String path = "C:\\Users\\admin\\Desktop\\caps_springboot\\test2\\mingyun_backend\\photo"+imageFile.getOriginalFilename();
+
+
+//        String path = "/Users/mingyun/Desktop/project/spring_jwt/src/main/java/org/example/spring_jwt/place/image/"+imageFile.getOriginalFilename();
+        String path = basePath+imageFile.getOriginalFilename();
         imageFile.transferTo(new File(path));
 
         placeDTO.setPlaceTitle(placeTitle);
