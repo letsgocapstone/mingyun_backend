@@ -1,6 +1,5 @@
 package org.example.spring_jwt.article.entity;
 
-p;
 
 import jakarta.persistence.*;
 import lombok.Getter;
