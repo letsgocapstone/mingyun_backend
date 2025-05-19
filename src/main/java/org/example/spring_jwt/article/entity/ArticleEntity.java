@@ -1,24 +1,40 @@
 package org.example.spring_jwt.article.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.spring_jwt.entity.UserEntity;
+import org.example.spring_jwt.place.entity.PlaceEntity;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "article")
 public class ArticleEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id;  // PlaceEntity의 ID와 동일
 
-    @Column(unique = true)
-    private String Title;
-    private String Content;
+    @Column(name = "title")
+    private String title;
 
-    @ManyToOne  // 여러 게시글이 한 사용자(UserEntity)를 참조 가능
-    @JoinColumn(name = "author_id")  // 외래 키 칼럼 이름
-    private UserEntity author;
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "createtime")
+    private LocalDateTime createTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;  // 작성자 정보
+
+    @OneToOne
+    @MapsId  // place.id를 article.id로 사용
+    @JoinColumn(name = "place_id", nullable = false)
+    private PlaceEntity place;
+
 }
