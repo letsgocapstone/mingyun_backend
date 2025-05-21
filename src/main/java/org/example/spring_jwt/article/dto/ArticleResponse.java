@@ -24,6 +24,8 @@ public class ArticleResponse {
     private Double longitude;
     private String placeImageURL;
     private Integer rating;
+    private Integer placeId;
+
 
     //from UserEntity
     private String username;
