@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PlaceRepository extends JpaRepository<PlaceEntity, Integer> {
 //    @Query(value = """
@@ -18,7 +19,10 @@ public interface PlaceRepository extends JpaRepository<PlaceEntity, Integer> {
 //        HAVING distance < :radius
 //        ORDER BY distance
 //        """, nativeQuery = true)
-@Query(value = """
+
+Optional<PlaceEntity> findByLatitudeAndLongitude(Double latitude, Double longitude);
+
+    @Query(value = """
     SELECT *, 
     (6371 * acos(
         cos(radians(:lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians(:lng)) +

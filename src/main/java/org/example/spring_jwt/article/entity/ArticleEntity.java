@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class ArticleEntity {
 
     @Id
-    private int id;  // PlaceEntity의 ID와 동일
+    private int id;
 
     @Column(name = "title")
     private String title;
@@ -32,9 +32,8 @@ public class ArticleEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;  // 작성자 정보
 
-    @OneToOne
-    @MapsId  // place.id를 article.id로 사용
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id", nullable = false)
-    private PlaceEntity place;
+    private PlaceEntity place; //위치 정보
 
 }
