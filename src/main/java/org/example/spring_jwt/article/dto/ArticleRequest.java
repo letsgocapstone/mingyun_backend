@@ -24,6 +24,7 @@ public class ArticleRequest {
     private String placeImageURL;
     private Integer rating;
     private Integer placeId;
+    private String tag;
 
 
     //from UserEntity
@@ -35,6 +36,7 @@ public class ArticleRequest {
         request.setTitle(article.getTitle());
         request.setContent(article.getContent());
         request.setCreateTime(article.getCreateTime());
+        request.setTag(article.getTag());
 
         //from PlaceEntity
         request.setLongitude(place.getLongitude());

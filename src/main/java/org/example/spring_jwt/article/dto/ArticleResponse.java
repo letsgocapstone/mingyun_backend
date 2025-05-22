@@ -18,6 +18,7 @@ public class ArticleResponse {
     private String title;
     private String content;
     private LocalDateTime createTime;
+    private String tag;
 
     //from PlaceEntity
     private Double latitude;
@@ -36,7 +37,7 @@ public class ArticleResponse {
         response.setTitle(article.getTitle());
         response.setContent(article.getContent());
         response.setCreateTime(article.getCreateTime());
-
+        response.setTag(article.getTag());
         //from PlaceEntity
         response.setLongitude(place.getLongitude());
         response.setLatitude(place.getLatitude());

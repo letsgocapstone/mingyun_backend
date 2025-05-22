@@ -28,6 +28,9 @@ public class ArticleEntity {
     @Column(name = "createtime")
     private LocalDateTime createTime;
 
+    @Column(name = "tag")
+    private String tag;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;  // 작성자 정보
