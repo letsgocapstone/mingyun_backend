@@ -29,7 +29,7 @@ TEST JSON
 
   "latitude": 37.123456,
   "longitude": 127.987654,
-  "placeImageURL": "https://ecimg.cafe24img.com/pg673b98521102061/asdfkorea/web/product/medium/20250424/631c0a1882bd9b452b132d9e47524570.png",
+  "placeImageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-2cpKDTU41XQ8eFhvTd9P4PuXUOvwDAAK8g&s",
   "rating": 4,
   "placeId": 1,
 
@@ -37,3 +37,10 @@ TEST JSON
 
   "tags": ["운동", "한강", "철봉"]
 }
+
+
+.
+
+
+
+
