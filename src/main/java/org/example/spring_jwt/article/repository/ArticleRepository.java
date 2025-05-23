@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer> {
-    // 필요한 경우 추가적인 쿼리 메서드를 작성할 수 있습니다.
 }
 

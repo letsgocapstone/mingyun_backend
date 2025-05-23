@@ -79,14 +79,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = jwtUtil.createJwt(username, role, 60*60*1000L);
 
         response.addHeader("Authorization", "Bearer " + token);
-//        Map<String, String> responseMap = new HashMap<>();
-//        responseMap.put("message", "로그인 성공");
-//        responseMap.put("token", token);
-//
-//        // JSON 응답으로 보내기
-//        response.setContentType("application/json"); // 응답 타입을 JSON으로 설정
-//        response.setCharacterEncoding("UTF-8"); // 문자 인코딩 설정
-//        response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap)); // JSON으로 응답 본문에 토큰 포함
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("message", "로그인 성공");
+        responseMap.put("token", token);
+
+        // JSON 응답으로 보내기
+        response.setContentType("application/json"); // 응답 타입을 JSON으로 설정
+        response.setCharacterEncoding("UTF-8"); // 문자 인코딩 설정
+        response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap)); // JSON으로 응답 본문에 토큰 포함
     }
 
     //로그인 실패시 실행하는 메소드
