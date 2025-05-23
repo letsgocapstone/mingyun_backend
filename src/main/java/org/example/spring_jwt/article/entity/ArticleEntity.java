@@ -6,8 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.entity.PlaceEntity;
+import org.example.spring_jwt.tag.Entity.TagEntity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,8 +31,8 @@ public class ArticleEntity {
     @Column(name = "createtime")
     private LocalDateTime createTime;
 
-    @Column(name = "tag")
-    private String tag;
+//    @Column(name = "tag")
+//    private String tag;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -39,4 +42,12 @@ public class ArticleEntity {
     @JoinColumn(name = "place_id", nullable = false)
     private PlaceEntity place; //위치 정보
 
+    @ManyToMany
+    @JoinTable(
+            name = "article_tag",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<TagEntity> tags = new ArrayList<>();
 }
+

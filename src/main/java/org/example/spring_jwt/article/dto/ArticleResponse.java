@@ -7,6 +7,7 @@ import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.entity.PlaceEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 //ResponseDTO	서버 → 클라이언트 / 게시글 조회, 사용자 정보 반환
@@ -18,7 +19,9 @@ public class ArticleResponse {
     private String title;
     private String content;
     private LocalDateTime createTime;
-    private String tag;
+
+    //Tag
+    private List<String> tags;
 
     //from PlaceEntity
     private Double latitude;
@@ -37,7 +40,15 @@ public class ArticleResponse {
         response.setTitle(article.getTitle());
         response.setContent(article.getContent());
         response.setCreateTime(article.getCreateTime());
-        response.setTag(article.getTag());
+
+        //Tag
+        if (article.getTags() != null) {
+            List<String> tagNames = article.getTags().stream()
+                    .map(tag -> tag.getName())
+                    .toList();
+            response.setTags(tagNames);
+        }
+
         //from PlaceEntity
         response.setLongitude(place.getLongitude());
         response.setLatitude(place.getLatitude());

@@ -7,6 +7,7 @@ import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.entity.PlaceEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 //RequestDTO	클라이언트 → 서버	게시글 작성
 @Getter
@@ -24,7 +25,11 @@ public class ArticleRequest {
     private String placeImageURL;
     private Integer rating;
     private Integer placeId;
-    private String tag;
+
+    //Tag
+    private List<String> tags;
+
+
 
 
     //from UserEntity
@@ -36,7 +41,14 @@ public class ArticleRequest {
         request.setTitle(article.getTitle());
         request.setContent(article.getContent());
         request.setCreateTime(article.getCreateTime());
-        request.setTag(article.getTag());
+
+        // 태그 설정
+        if (article.getTags() != null) {
+            List<String> tagNames = article.getTags().stream()
+                    .map(tag -> tag.getName())
+                    .toList();
+            request.setTags(tagNames);
+        }
 
         //from PlaceEntity
         request.setLongitude(place.getLongitude());
