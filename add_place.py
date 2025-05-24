@@ -20,7 +20,7 @@ except json.JSONDecodeError:
 
 # POST할 데이터 (form-data 형태로 구성)
 files = {'placeImageURL': open(image_path, 'rb')}  # 키 이름을 'placeImageURL'로 변경
-headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhpQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzQ3MTA3MTkyLCJleHAiOjE3NDcxMTA3OTJ9.MToP29H-WOfbT3yqJtdJxZokypNaRqgHMJuOt6yfRj0'}
+headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3RAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpYXQiOjE3NDc3MTgwODcsImV4cCI6MTc0NzcyMTY4N30.Y4TdhQoeLRdFvZSiZK90OOLUEmOn-E6sKse4essWgTY'}
 if "records" in data and isinstance(data["records"], list):
     for record in data["records"]:
         payload = {

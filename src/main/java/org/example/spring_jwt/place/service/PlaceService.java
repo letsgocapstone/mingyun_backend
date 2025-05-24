@@ -22,21 +22,23 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
-    public void addPlaceProcess(PlaceDTO placeDTO) {
+    public PlaceEntity addPlaceProcess(PlaceDTO placeDTO) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserEntity user = userRepository.findByUsername(username);
 
         PlaceEntity place = new PlaceEntity();
         place.setPlaceTitle(placeDTO.getPlaceTitle());
-        place.setPlaceDescription(placeDTO.getPlaceDescription());
+//        place.setPlaceDescription(placeDTO.getPlaceDescription());
         place.setLatitude(placeDTO.getLatitude());
         place.setLongitude(placeDTO.getLongitude());
         place.setPlaceImageURL(placeDTO.getPlaceImageURL());
-        place.setRating(placeDTO.getRating());
+//        place.setRating(placeDTO.getRating());
         place.setUser(user);
 
-        placeRepository.save(place);
+//        placeRepository.save(place);
+        return placeRepository.save(place); // 저장 후 엔티티 반환
+
     }
 
     public LoadPlaceDTO findNearbyLocations(double lat, double lng) {

@@ -2,7 +2,10 @@ package org.example.spring_jwt.place.controller;
 
 import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.dto.PlaceDTO;
+import org.example.spring_jwt.place.dto.PostDTO;
+import org.example.spring_jwt.place.entity.PlaceEntity;
 import org.example.spring_jwt.place.service.PlaceService;
+import org.example.spring_jwt.place.service.PostService;
 import org.example.spring_jwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +24,12 @@ public class AddPlaceController {
 
     private final PlaceService placeService;
     private final UserRepository userRepository;
+    private final PostService postService;
 
-    public AddPlaceController(PlaceService placeService, UserRepository userRepository) {
+    public AddPlaceController(PlaceService placeService, UserRepository userRepository, PostService postService) {
         this.placeService = placeService;
         this.userRepository = userRepository;
+        this.postService = postService;
     }
     // 장소 등록 API
     @Value("${spring.my.path}")
@@ -39,6 +44,7 @@ public class AddPlaceController {
             @RequestParam("placeImageURL") MultipartFile imageFile) throws IOException {
 
         PlaceDTO placeDTO = new PlaceDTO();
+        PostDTO postDTO = new PostDTO();
 
 
 
@@ -50,12 +56,21 @@ public class AddPlaceController {
         placeDTO.setLatitude(latitude);
         placeDTO.setLongitude(longitude);
         placeDTO.setPlaceImageURL(path);
-        placeDTO.setRating(rating);
-        placeDTO.setPlaceDescription(placeDescription);
 
-        System.out.println("Adding place " + placeDTO.getPlaceImageURL());
+        PlaceEntity savedPlace = placeService.addPlaceProcess(placeDTO);
 
-        placeService.addPlaceProcess(placeDTO);
+//        placeDTO.setRating(rating);
+//        placeDTO.setPlaceDescription(placeDescription);
+        postDTO.setTitle(placeTitle);
+        postDTO.setContent(placeDescription);
+        postDTO.setRating(rating);
+        postDTO.setPlaceId(savedPlace.getId());
+
+
+//        System.out.println("Adding place " + placeDTO.getPlaceImageURL());
+
+
+        postService.addPost(postDTO, savedPlace);
         return ResponseEntity.ok("장소가 성공적으로 등록되었습니다.");
     }
 }
