@@ -17,6 +17,7 @@ public class PlaceEntity {
     private Double latitude;
     private Double longitude;
     private String placeImageURL;
+
 //    private Integer rating;
 //    private String placeDescription;
 

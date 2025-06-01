@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +19,5 @@ public class PostDTO {
     private String placeImageURL;  // 장소 이미지 URL 추가
     private Double latitude;
     private Double longitude;
+    private List<String> tags;
 }

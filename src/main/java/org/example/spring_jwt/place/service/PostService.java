@@ -4,26 +4,31 @@ import org.example.spring_jwt.entity.UserEntity;
 import org.example.spring_jwt.place.dto.PostDTO;
 import org.example.spring_jwt.place.entity.PlaceEntity;
 import org.example.spring_jwt.place.entity.PostEntity;
+import org.example.spring_jwt.place.entity.TagEntity;
 import org.example.spring_jwt.place.repository.PlaceRepository;
 import org.example.spring_jwt.place.repository.PostRepository;
+import org.example.spring_jwt.place.repository.TagRepository;
 import org.example.spring_jwt.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final TagRepository tagRepository;
 
-    public PostService(UserRepository userRepository, PostRepository postRepository) {
+    public PostService(UserRepository userRepository, PostRepository postRepository, TagRepository tagRepository) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
-//        this.placeRepository = placeRepository;
+        this.tagRepository = tagRepository;
     }
 
-    public void addPost(PostDTO postDTO, PlaceEntity placeEntity) {
+    public void addPost(PostDTO postDTO, PlaceEntity placeEntity, List<String> tagNames) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUsername(username);
 
@@ -33,7 +38,19 @@ public class PostService {
         post.setRating(postDTO.getRating());
         post.setCreateTime(LocalDateTime.now());
         post.setUser(user);
+
         post.setPlace(placeEntity); // 이미 조회된 엔티티 사용
+
+        List<TagEntity> tags = tagNames.stream()
+                .map(name -> tagRepository.findByName(name)
+                        .orElseGet(() -> {
+                            TagEntity tag = new TagEntity();
+                            tag.setName(name);
+                            return tagRepository.save(tag);
+                        }))
+                .collect(Collectors.toList());
+
+        post.setTags(tags);
 
         postRepository.save(post);
     }

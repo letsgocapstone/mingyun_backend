@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 
 @RestController
@@ -40,6 +42,7 @@ public class AddPlaceController {
             @RequestParam("lat") Double latitude,
             @RequestParam("lng") Double longitude,
             @RequestParam("rating") Integer rating,
+            @RequestParam("tags") List<String> tags,
             @RequestParam("placeDescription") String placeDescription,
             @RequestParam("placeImageURL") MultipartFile imageFile) throws IOException {
 
@@ -66,11 +69,10 @@ public class AddPlaceController {
         postDTO.setRating(rating);
         postDTO.setPlaceId(savedPlace.getId());
 
-
 //        System.out.println("Adding place " + placeDTO.getPlaceImageURL());
 
 
-        postService.addPost(postDTO, savedPlace);
+        postService.addPost(postDTO, savedPlace, tags);
         return ResponseEntity.ok("장소가 성공적으로 등록되었습니다.");
     }
 }
